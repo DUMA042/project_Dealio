@@ -7,6 +7,10 @@ android {
     namespace = "com.example.dealio"
     compileSdk = 34
 
+    buildFeatures {
+        buildConfig=true
+    }
+
     defaultConfig {
         applicationId = "com.example.dealio"
         minSdk = 24
@@ -18,10 +22,15 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+
     }
 
     buildTypes {
+        debug { buildConfigField("String", "Namet", "\"It is working\"")}
+
         release {
+            buildConfigField("String", "Namet", "\"It is working\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
