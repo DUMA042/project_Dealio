@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -35,10 +36,24 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     val myConstant = BuildConfig.Namet;
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+
+    Column{
+        Text(
+            text = "Hello ${BuildConfig.BARCODEAPI}!",
+            modifier = modifier
+        )
+
+        Text(
+            text = "Hello $myConstant!",
+            modifier = modifier
+        )
+
+        Text(
+            text = "Hello $myConstant!",
+            modifier = modifier
+        )
+    }
+
 }
 
 @Preview(showBackground = true)
@@ -47,4 +62,6 @@ fun GreetingPreview() {
     DealioTheme {
         Greeting("Android")
     }
+
+
 }
