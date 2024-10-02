@@ -1,7 +1,15 @@
 plugins {
+    alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.secrets.gradle.plugin)
+    alias(libs.plugins.dagger.hilt.android)
+
+
+
+
+
+
 
 }
 
@@ -61,6 +69,11 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.hilt.android)
+
+    ksp(libs.hilt.android.compiler)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
