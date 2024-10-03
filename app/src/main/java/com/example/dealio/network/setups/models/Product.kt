@@ -1,5 +1,8 @@
 package com.example.dealio.network.setups.models
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Product(val barcodeNumber: String,
                    val barcodeFormats: String,
                    val mpn: String,

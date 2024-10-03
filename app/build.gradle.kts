@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.secrets.gradle.plugin)
     alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.compose.compiler)
 
 
 
@@ -70,9 +71,27 @@ android {
 
 dependencies {
 
+    //Hilt
     implementation(libs.hilt.android)
 
+    //ksp
     ksp(libs.hilt.android.compiler)
+
+    //OKHttp
+    implementation(platform(libs.okhttpBom))
+    implementation(libs.okhttp)
+    implementation(libs.loggingInterceptor)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converterGson)
+
+    // Moshi
+    implementation(libs.moshi)
+    implementation(libs.converterMoshi)
+    implementation(libs.moshiKotlin)
+    ksp(libs.moshiKotlinCodegen)
+
 
 
     implementation(libs.androidx.core.ktx)
