@@ -8,3 +8,4 @@ private interface RetrofitNiaNetwork {
 
 }
 
+private const val NIA_BASE_URL = BuildConfig.WEBURL
