@@ -1,11 +1,26 @@
 plugins {
+    alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.secrets.gradle.plugin)
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.compose.compiler)
+
+
+
+
+
+
+
 }
 
 android {
     namespace = "com.example.dealio"
     compileSdk = 34
+
+    buildFeatures {
+        buildConfig=true
+    }
 
     defaultConfig {
         applicationId = "com.example.dealio"
@@ -18,10 +33,15 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+
     }
 
     buildTypes {
+        debug { buildConfigField("String", "Namet", "\"It is working\"")}
+
         release {
+            buildConfigField("String", "Namet", "\"It is working\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -67,6 +87,29 @@ dependencies {
     implementation(libs.camera.view)
 
     implementation(libs.mlkit.barcode.scanning)
+    //Hilt ff
+    implementation(libs.hilt.android)
+
+    //ksp
+    ksp(libs.hilt.android.compiler)
+
+    //OKHttp
+    implementation(platform(libs.okhttpBom))
+    implementation(libs.okhttp)
+    implementation(libs.loggingInterceptor)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converterGson)
+
+    // Moshi
+    implementation(libs.moshi)
+    implementation(libs.converterMoshi)
+    implementation(libs.moshiKotlin)
+    ksp(libs.moshiKotlinCodegen)
+
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

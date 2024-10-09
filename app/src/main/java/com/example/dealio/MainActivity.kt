@@ -10,6 +10,7 @@ import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.camera.view.CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -21,6 +22,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.dealio.databinding.ActivityMainBinding
 import com.example.dealio.ui.theme.DealioTheme
+import dagger.hilt.android.AndroidEntryPoint
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -32,6 +34,9 @@ import android.util.Log
 import com.example.dealio.QrCodeScannerProcessor.Companion
 
 
+
+//This is for the network code and setup
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     lateinit var viewBinding: ActivityMainBinding
     private lateinit var cameraExecutor: ExecutorService
@@ -147,12 +152,7 @@ private fun startCamera() {
             }
         }
     }
-    //--------------------------------------------------
 }
-
-
-
-
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
