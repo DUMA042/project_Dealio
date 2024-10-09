@@ -71,7 +71,7 @@ android {
 
 dependencies {
 
-    //Hilt
+    //Hilt ff
     implementation(libs.hilt.android)
 
     //ksp
