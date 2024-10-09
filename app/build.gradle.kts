@@ -54,6 +54,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.accompanistPermissions)
 
     implementation(libs.appcompatm)
     implementation(libs.constraintlayout)
