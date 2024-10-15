@@ -4,7 +4,7 @@ package com.example.dealio.permissions
 
 import android.content.Context
 import androidx.activity.result.ActivityResultLauncher
-import androidx.core.app.ActivityCompat
+
 
 class PermissionManager(private val context: Context) {
 
@@ -13,13 +13,13 @@ class PermissionManager(private val context: Context) {
         launcher: ActivityResultLauncher<String>,
         callback: PermissionCallback
     ) {
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                permission
-            ) == android.content.pm.PackageManager.PERMISSION_GRANTED
-        ) {
+        if(PermissionUtils.isPermissionGranted(context,permission)){
             callback.onPermissionGranted()
-        } else {
+        }
+        else if (PermissionUtils.shouldShowRationale(context,permission)){
+            callback.shouldShowRationale()
+        }
+        else {
             launcher.launch(permission)
         }
     }

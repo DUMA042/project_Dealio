@@ -31,6 +31,9 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import android.Manifest
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.Button
 import androidx.compose.runtime.getValue
@@ -44,15 +47,20 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.dealio.QrCodeScannerProcessor.Companion
+import com.example.dealio.permissions.PermissionCallback
+import com.example.dealio.permissions.PermissionManager
+import com.example.dealio.permissions.ShowRationaleDialog
 import com.example.dealio.uiLayout.QrcodeResultUI.QrCodeResultScreen
 import com.example.dealio.uiLayout.cameraUI.CameraPreviewWithBarcodeScanner
-
+import com.example.dealio.viewmodels.CameraResultViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
+    private val cameraResultViewModel:CameraResultViewModel by viewModels()
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var barcodeScanner: BarcodeScanner
+    private lateinit var permissionManager: PermissionManager
+    private lateinit var permissionLauncher: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,79 +69,102 @@ class MainActivity : ComponentActivity() {
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
+        permissionManager = PermissionManager(this)
+
+        permissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(this, "Camera permission granted.", Toast.LENGTH_SHORT).show()
+                cameraResultViewModel.updateQrCodeValue(null)
+            } else {
+                Toast.makeText(this, "Camera permission not granted.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
         setContent {
+
+
+
             DealioTheme {
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    var qrCodeValue by remember { mutableStateOf<String?>(null) }
-                    if (allPermissionsGranted()) {
-                        if (qrCodeValue == null) {
-                            CameraPreviewWithBarcodeScanner(
-                                modifier = Modifier.padding(innerPadding),
-                                onQrCodeDetected = { rawValue ->
-                                    qrCodeValue = rawValue
-                                }
-                            )
-                        } else {
-                            QrCodeResultScreen(
-                                qrCodeValue = qrCodeValue!!,
-                                onRestartCamera = { qrCodeValue = null }
-                            )
+                    val qrCodeValue by cameraResultViewModel.qrCodeValue
+                    val toshowRational by  cameraResultViewModel.showRationaleDialog
+
+
+
+ //-----------------------------------------------------------------------------------
+
+                    val cameraCallback=object:PermissionCallback {
+                        override fun onPermissionGranted() {
+                            cameraResultViewModel.updateQrCodeValue(null)
                         }
-                    } else {
-                        ActivityCompat.requestPermissions(
-                            this@MainActivity,
-                            REQUIRED_PERMISSIONS,
-                            REQUEST_CODE_PERMISSIONS
+
+                        override fun shouldShowRationale() {
+                          cameraResultViewModel.updateShowRational()
+                        }
+
+                        override fun onPermissionDenied() {
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Camera permission denied.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+//-----------------------------------------------------------------------------------
+                    if(toshowRational){
+                        ShowRationaleDialog(
+                            onDismiss = { cameraResultViewModel.updateShowRational(false) },
+                            onConfirm = {
+                                cameraResultViewModel.updateShowRational(false)
+                                permissionManager.checkAndRequestPermission(
+                                    Manifest.permission.CAMERA,
+                                    permissionLauncher,
+                                    cameraCallback
+                                )
+                            }
                         )
                     }
+
+                    if (qrCodeValue == null) {
+                        CameraPreviewWithBarcodeScanner(
+                            modifier = Modifier.padding(innerPadding),
+                            onQrCodeDetected = { rawValue ->
+                                cameraResultViewModel.updateQrCodeValue(rawValue)
+                            }
+                        )
+                    }
+                    else{
+                        QrCodeResultScreen(
+                            qrCodeValue = qrCodeValue?:"Waiting To Scan",
+                            onRestartCamera = {
+                                permissionManager.checkAndRequestPermission(
+                                    Manifest.permission.CAMERA,
+                                    permissionLauncher,
+                                    cameraCallback
+                                )
+                            },
+                            modifier = Modifier.padding(innerPadding)
+                        )
+                    }
+
                 }
             }
         }
     }
 
 
-
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-    }
 
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
         barcodeScanner.close()
     }
-
-    companion object {
-        private const val TAG = "CameraX-MLKit"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
-                setContent {
-                    DealioTheme {
-                        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                            CameraPreviewWithBarcodeScanner(modifier = Modifier.padding(innerPadding)) {
-                                // handle QR code scanning result here
-                            }
-                        }
-                    }
-                }
-            } else {
-                Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        }
-    }
 }
-
 
 
 @Composable
