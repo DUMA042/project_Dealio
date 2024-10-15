@@ -44,7 +44,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.dealio.QrCodeScannerProcessor.Companion
-
+import com.example.dealio.uiLayout.QrcodeResultUI.QrCodeResultScreen
+import com.example.dealio.uiLayout.cameraUI.CameraPreviewWithBarcodeScanner
 
 
 @AndroidEntryPoint
@@ -90,72 +91,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun CameraPreviewWithBarcodeScanner(
-        modifier: Modifier = Modifier,
-        onQrCodeDetected: (String) -> Unit
-    ) {
-        val context = LocalContext.current
-        val lifecycleOwner = LocalLifecycleOwner.current
 
-        val cameraController = remember {
-            LifecycleCameraController(context)
-        }
-
-        AndroidView(
-            modifier = modifier.fillMaxSize(),
-            factory = { ctx ->
-                PreviewView(ctx).apply {
-                    val options = BarcodeScannerOptions.Builder()
-                        .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
-                        .build()
-                    barcodeScanner = BarcodeScanning.getClient(options)
-
-                    cameraController.setImageAnalysisAnalyzer(
-                        ContextCompat.getMainExecutor(ctx),
-                        MlKitAnalyzer(
-                            listOf(barcodeScanner),
-                            COORDINATE_SYSTEM_VIEW_REFERENCED,
-                            ContextCompat.getMainExecutor(ctx)
-                        ) { result: MlKitAnalyzer.Result? ->
-                            val barcodeResults = result?.getValue(barcodeScanner)
-                            if (barcodeResults.isNullOrEmpty() || barcodeResults.first() == null) {
-                                overlay.clear()
-                                setOnTouchListener { _, _ -> false }
-                                return@MlKitAnalyzer
-                            }
-                            val barcode = barcodeResults.first().rawValue?:"0000000"
-                            Log.e(TAG, "Barcode detected: $barcode")
-                            onQrCodeDetected(barcode)
-                        }
-                    )
-
-                    // Attach lifecycle to camera
-                    cameraController.bindToLifecycle(lifecycleOwner)
-                    this.controller = cameraController
-                }
-            },
-            update = { previewView ->
-                // Update PreviewView if needed
-            }
-        )
-    }
-
-    @Composable
-    fun QrCodeResultScreen(qrCodeValue: String, onRestartCamera: () -> Unit) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(text = "QR Code: $qrCodeValue", fontSize = 20.sp, modifier = Modifier.padding(16.dp))
-            Button(onClick = { onRestartCamera() }) {
-                Text(text = "Scan Again")
-            }
-        }
-    }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
