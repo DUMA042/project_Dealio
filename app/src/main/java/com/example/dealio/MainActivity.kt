@@ -48,7 +48,9 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.dealio.QrCodeScannerProcessor.Companion
 import com.example.dealio.permissions.PermissionCallback
+import com.example.dealio.permissions.PermissionHandler
 import com.example.dealio.permissions.PermissionManager
+import com.example.dealio.permissions.PermissionUtils
 import com.example.dealio.permissions.ShowRationaleDialog
 import com.example.dealio.uiLayout.QrcodeResultUI.QrCodeResultScreen
 import com.example.dealio.uiLayout.cameraUI.CameraPreviewWithBarcodeScanner
@@ -60,34 +62,37 @@ class MainActivity : ComponentActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var barcodeScanner: BarcodeScanner
     private lateinit var permissionManager: PermissionManager
+    private lateinit var permissionHandler: PermissionHandler
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
+
+    companion object {
+        private const val TAG = "ttt"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
+        permissionHandler = PermissionHandler(this, cameraResultViewModel)
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
         permissionManager = PermissionManager(this)
 
-        permissionLauncher = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
+        permissionLauncher = permissionHandler.requestPermission(
+            Manifest.permission.CAMERA,
+            onPermissionGranted = {
                 Toast.makeText(this, "Camera permission granted.", Toast.LENGTH_SHORT).show()
                 cameraResultViewModel.updateQrCodeValue(null)
-            } else {
+            },
+            onPermissionDenied = {
                 Toast.makeText(this, "Camera permission not granted.", Toast.LENGTH_SHORT).show()
             }
-        }
+        )
 
 
 
         setContent {
-
-
-
             DealioTheme {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -103,10 +108,6 @@ class MainActivity : ComponentActivity() {
                             cameraResultViewModel.updateQrCodeValue(null)
                         }
 
-                        override fun shouldShowRationale() {
-                          cameraResultViewModel.updateShowRational()
-                        }
-
                         override fun onPermissionDenied() {
                             Toast.makeText(
                                 this@MainActivity,
@@ -116,12 +117,13 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 //-----------------------------------------------------------------------------------
+
                     if(toshowRational){
                         ShowRationaleDialog(
                             onDismiss = { cameraResultViewModel.updateShowRational(false) },
                             onConfirm = {
-                                cameraResultViewModel.updateShowRational(false)
-                                permissionManager.checkAndRequestPermission(
+                                cameraResultViewModel.updateShowRational(false) // Dismiss the dialog
+                                permissionManager.checkAndRequestPermission( // Retry permission
                                     Manifest.permission.CAMERA,
                                     permissionLauncher,
                                     cameraCallback
@@ -129,6 +131,9 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     }
+
+
+                    Log.e(TAG, "to_show is = ($toshowRational)", )
 
                     if (qrCodeValue == null) {
                         CameraPreviewWithBarcodeScanner(

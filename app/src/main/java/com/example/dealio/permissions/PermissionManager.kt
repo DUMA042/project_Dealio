@@ -3,10 +3,19 @@ package com.example.dealio.permissions
 
 
 import android.content.Context
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
+import com.example.dealio.MainActivity
+import com.example.dealio.MainActivity.Companion
 
 
 class PermissionManager(private val context: Context) {
+
+
+    companion object {
+        private const val TAG = "vvv"
+    }
+
 
     fun checkAndRequestPermission(
         permission: String,
@@ -16,11 +25,10 @@ class PermissionManager(private val context: Context) {
         if(PermissionUtils.isPermissionGranted(context,permission)){
             callback.onPermissionGranted()
         }
-        else if (PermissionUtils.shouldShowRationale(context,permission)){
-            callback.shouldShowRationale()
-        }
+
         else {
             launcher.launch(permission)
         }
     }
 }
+
