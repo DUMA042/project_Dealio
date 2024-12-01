@@ -16,7 +16,7 @@ plugins {
 
 android {
     namespace = "com.example.dealio"
-    compileSdk = 34
+    compileSdk = 35
 
     buildFeatures {
         buildConfig=true
@@ -38,10 +38,13 @@ android {
     }
 
     buildTypes {
-        debug { buildConfigField("String", "Namet", "\"It is working\"")}
+        debug { buildConfigField("String", "Namet", "\"It is working\"")
+            buildConfigField("String", "WEBURL", "\"https://barcodelookup.com/\"")
+        }
 
         release {
             buildConfigField("String", "Namet", "\"It is working\"")
+            buildConfigField("String", "WEBURL", "\"https://api.example.com/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

@@ -3,9 +3,10 @@ package com.example.dealio.uiLayout.cameraUI
 
 
 
+import android.util.Log
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.view.PreviewView
 import androidx.camera.mlkit.vision.MlKitAnalyzer
-import androidx.camera.view.CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -43,12 +44,16 @@ fun CameraPreviewWithBarcodeScanner(
                     ContextCompat.getMainExecutor(ctx),
                     MlKitAnalyzer(
                         listOf(barcodeScanner),
-                        COORDINATE_SYSTEM_VIEW_REFERENCED,
+                        ImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED,
                         ContextCompat.getMainExecutor(ctx)
                     ) { result: MlKitAnalyzer.Result? ->
                         val barcodeResults = result?.getValue(barcodeScanner)
                         if (!barcodeResults.isNullOrEmpty()) {
+
                             val barcode = barcodeResults.first().rawValue
+                            Log.d("Looking for Barcode ",
+                                barcodeResults.first().boundingBox.toString()
+                            )
                             onQrCodeDetected(barcode ?: "")
                         }
                     }
