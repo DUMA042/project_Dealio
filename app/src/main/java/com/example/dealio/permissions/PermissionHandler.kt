@@ -3,12 +3,18 @@ package com.example.dealio.permissions
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.example.dealio.viewmodels.CameraResultViewModel
+import javax.inject.Inject
+import kotlin.getValue
 
-class PermissionHandler(
+
+class PermissionHandler @Inject constructor(
     private val activity: ComponentActivity,
     private val viewModel: CameraResultViewModel // You can pass other ViewModels if needed
 ) {
+
+
 
     // General method to handle permissions dynamically
     fun requestPermission(

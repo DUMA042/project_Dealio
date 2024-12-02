@@ -25,10 +25,8 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.delay
 
@@ -39,7 +37,7 @@ fun CameraPreviewWithBarcodeScanner(
     onQrCodeDetected: (String) -> Unit
 ) {
     var barcode by remember { mutableStateOf<String?>(null) }
-    //val onQrCodeDetected by rememberUpdatedState(onQrCodeDetected)
+
     val context = LocalContext.current
     val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
     var qrCodeDetected by remember { mutableStateOf(false) }
