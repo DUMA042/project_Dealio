@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun QrCodeResultScreen(
     qrCodeValue: String,
+    takePhoto: () -> Unit,
     onRestartCamera: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -28,6 +29,10 @@ fun QrCodeResultScreen(
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = onRestartCamera) {
             Text(text = "Scan Again")
+        }
+
+        Button(onClick = takePhoto) {
+            Text(text = "Take a Photo")
         }
     }
 }

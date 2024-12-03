@@ -36,6 +36,7 @@ import com.example.dealio.permissions.PermissionManager
 import com.example.dealio.permissions.ShowRationaleDialog
 import com.example.dealio.uiLayout.QrcodeResultUI.QrCodeResultScreen
 import com.example.dealio.uiLayout.cameraUI.CameraPreviewWithBarcodeScanner
+import com.example.dealio.uiLayout.cameraUI.CameraScreen
 import com.example.dealio.viewmodels.CameraResultViewModel
 
 
@@ -80,6 +81,8 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val qrCodeValue by cameraResultViewModel.qrCodeValue
+                    val takephoto by cameraResultViewModel.takePhoto
+
                     val toshowRational by  cameraResultViewModel.showRationaleDialog
 
 
@@ -105,7 +108,7 @@ class MainActivity : ComponentActivity() {
                         ShowRationaleDialog(
                             onDismiss = { cameraResultViewModel.updateShowRational(false) },
                             onConfirm = {
-                                cameraResultViewModel.updateShowRational(false) // Dismiss the dialog
+                                cameraResultViewModel.updateShowRational(true) // Dismiss the dialog
                                 permissionManager.checkAndRequestPermission( // Retry permission
                                     Manifest.permission.CAMERA,
                                     permissionLauncher,
@@ -118,6 +121,10 @@ class MainActivity : ComponentActivity() {
 
                     Log.e(TAG, "to_show is = ($toshowRational)", )
 
+                    if(takephoto){
+                        CameraScreen(this)
+                    }
+
                     if (qrCodeValue == null) {
                         CameraPreviewWithBarcodeScanner(
                             modifier = Modifier.padding(innerPadding),
@@ -129,6 +136,7 @@ class MainActivity : ComponentActivity() {
                     else{
                         QrCodeResultScreen(
                             qrCodeValue = qrCodeValue?:"Waiting To Scan",
+                            takePhoto = {cameraResultViewModel.updateTakePhoto(true)},
                             onRestartCamera = {
                                 permissionManager.checkAndRequestPermission(
                                     Manifest.permission.CAMERA,

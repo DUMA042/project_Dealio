@@ -111,6 +111,9 @@ dependencies {
     implementation(libs.moshiKotlin)
     ksp(libs.moshiKotlinCodegen)
 
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.viewmodel.compose)
+
 
 
     implementation(libs.androidx.core.ktx)
