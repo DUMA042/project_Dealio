@@ -28,7 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.tooling.preview.Preview
+import com.google.mlkit.vision.barcode.common.Barcode
 import kotlinx.coroutines.delay
 
 
@@ -53,7 +53,15 @@ fun CameraPreviewWithBarcodeScanner(
         factory = { ctx ->
             PreviewView(ctx).apply {
                 val options = BarcodeScannerOptions.Builder()
-                    .setBarcodeFormats(com.google.mlkit.vision.barcode.common.Barcode.FORMAT_QR_CODE)
+                    .setBarcodeFormats(
+                        Barcode.FORMAT_QR_CODE,
+                        Barcode.FORMAT_CODABAR,
+                        Barcode.FORMAT_CODE_93,
+                        Barcode.FORMAT_CODE_39,
+                        Barcode.FORMAT_CODE_128,
+                        Barcode.FORMAT_EAN_8,
+                        Barcode.FORMAT_EAN_13,
+                        Barcode.FORMAT_AZTEC)
                     .build()
                 val barcodeScanner = BarcodeScanning.getClient(options)
 
