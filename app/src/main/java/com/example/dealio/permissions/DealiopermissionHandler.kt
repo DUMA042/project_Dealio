@@ -3,25 +3,23 @@ package com.example.dealio.permissions
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dealio.viewmodels.CameraResultViewModel
 import javax.inject.Inject
-import kotlin.getValue
 
 
-class PermissionHandler @Inject constructor(
+
+class DealiopermissionHandler @Inject constructor(
     private val activity: ComponentActivity,
-    private val viewModel: CameraResultViewModel // You can pass other ViewModels if needed
+//    private val viewModel: CameraResultViewModel // You can pass other ViewModels if needed
 ) {
-
 
 
     // General method to handle permissions dynamically
     fun requestPermission(
         permission: String,
         onPermissionGranted: () -> Unit,
-        onPermissionDenied: () -> Unit
+        onPermissionDenied: () -> Unit,
+        onRationaleNeeded: () -> Unit
     ): ActivityResultLauncher<String> {
         return activity.registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -30,7 +28,8 @@ class PermissionHandler @Inject constructor(
                 onPermissionGranted()
             } else {
                 if (PermissionUtils.shouldShowRationale(activity, permission)) {
-                    viewModel.updateShowRational(true)
+                    //will be changed
+                    onRationaleNeeded()
                 }
                 onPermissionDenied()
             }

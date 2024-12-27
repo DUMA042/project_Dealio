@@ -38,7 +38,6 @@ fun CameraPreviewWithBarcodeScanner(
     onQrCodeDetected: (String) -> Unit
 ) {
     var barcode by remember { mutableStateOf<String?>(null) }
-
     val context = LocalContext.current
     val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
     var qrCodeDetected by remember { mutableStateOf(false) }

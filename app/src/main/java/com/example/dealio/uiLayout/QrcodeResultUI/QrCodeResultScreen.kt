@@ -36,3 +36,30 @@ fun QrCodeResultScreen(
         }
     }
 }
+
+
+
+//--------------------------------------------------------------
+
+@Composable
+fun newQrCodeResultScreen(
+    qrCodeValue: String,
+    onRestartCamera: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "QR Code: $qrCodeValue", fontSize = 20.sp, modifier = Modifier.padding(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = onRestartCamera) {
+            Text(text = "Scan Again")
+        }
+
+
+    }
+}

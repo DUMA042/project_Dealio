@@ -6,4 +6,6 @@ interface PermissionCallback {
     fun onPermissionGranted()
 //    fun shouldShowRational()
     fun onPermissionDenied()
+
+    fun onShowRational()
 }

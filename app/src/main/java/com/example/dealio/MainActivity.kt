@@ -30,7 +30,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.getValue
 
 import com.example.dealio.permissions.PermissionCallback
-import com.example.dealio.permissions.PermissionHandler
+import com.example.dealio.permissions.DealiopermissionHandler
 import com.example.dealio.permissions.PermissionManager
 
 import com.example.dealio.permissions.ShowRationaleDialog
@@ -38,15 +38,19 @@ import com.example.dealio.uiLayout.QrcodeResultUI.QrCodeResultScreen
 import com.example.dealio.uiLayout.cameraUI.CameraPreviewWithBarcodeScanner
 import com.example.dealio.uiLayout.cameraUI.CameraScreen
 import com.example.dealio.viewmodels.CameraResultViewModel
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val cameraResultViewModel:CameraResultViewModel by viewModels()
-    private lateinit var cameraExecutor: ExecutorService
-    private lateinit var barcodeScanner: BarcodeScanner
+
+
     private lateinit var permissionManager: PermissionManager
-    private lateinit var permissionHandler: PermissionHandler
+
+    @Inject
+     lateinit var dealiopermissionHandler: DealiopermissionHandler
+
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
 
     companion object {
@@ -57,13 +61,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
-        permissionHandler = PermissionHandler(this,cameraResultViewModel)
 
-        cameraExecutor = Executors.newSingleThreadExecutor()
+
+
 
         permissionManager = PermissionManager(this)
 
-        permissionLauncher = permissionHandler.requestPermission(
+        permissionLauncher = dealiopermissionHandler.requestPermission(
             Manifest.permission.CAMERA,
             onPermissionGranted = {
                 Toast.makeText(this, "Camera permission granted.", Toast.LENGTH_SHORT).show()
@@ -71,6 +75,9 @@ class MainActivity : ComponentActivity() {
             },
             onPermissionDenied = {
                 Toast.makeText(this, "Camera permission not granted.", Toast.LENGTH_SHORT).show()
+            },
+            onRationaleNeeded = {
+                cameraResultViewModel.updateShowRational(true)
             }
         )
 
@@ -91,7 +98,7 @@ class MainActivity : ComponentActivity() {
 
                     val cameraCallback=object:PermissionCallback {
                         override fun onPermissionGranted() {
-                            cameraResultViewModel.updateQrCodeValue(null)
+                            cameraResultViewModel.updatePermistionState(true)
                         }
 
                         override fun onPermissionDenied() {
@@ -100,6 +107,10 @@ class MainActivity : ComponentActivity() {
                                 "Camera permission denied.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                        }
+
+                        override fun onShowRational() {
+                            cameraResultViewModel.updateShowRational(true)
                         }
                     }
 //-----------------------------------------------------------------------------------
@@ -157,10 +168,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
-        barcodeScanner.close()
+//        barcodeScanner.close()
     }
 }
+
+
+
+
 
 
 @Composable
