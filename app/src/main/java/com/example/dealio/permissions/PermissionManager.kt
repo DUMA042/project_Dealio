@@ -1,34 +1,37 @@
 package com.example.dealio.permissions
 
-
-
 import android.content.Context
-import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
-import com.example.dealio.MainActivity
-import com.example.dealio.MainActivity.Companion
+import javax.inject.Inject
 
+class PermissionManager @Inject constructor(
+    private val context: Context,
+    private val dealiopermissionHandler: DealiopermissionHandler
+) {
+    private var permissionLauncher: ActivityResultLauncher<String>? = null
 
-class PermissionManager(private val context: Context) {
-
-
-    companion object {
-        private const val TAG = "vvv"
+    fun registerPermissionLauncher(
+        activity: ComponentActivity,
+        permission: String,
+        callback: PermissionCallback
+    ) {
+        permissionLauncher = dealiopermissionHandler.requestPermission(
+            permission,
+            onPermissionGranted = callback::onPermissionGranted,
+            onPermissionDenied = callback::onPermissionDenied,
+            onRationaleNeeded = callback::onShowRational
+        )
     }
-
 
     fun checkAndRequestPermission(
         permission: String,
-        launcher: ActivityResultLauncher<String>,
         callback: PermissionCallback
     ) {
-        if(PermissionUtils.isPermissionGranted(context,permission)){
+        if (PermissionUtils.isPermissionGranted(context, permission)) {
             callback.onPermissionGranted()
-        }
-
-        else {
-            launcher.launch(permission)
+        } else {
+            permissionLauncher?.launch(permission)
         }
     }
 }
-

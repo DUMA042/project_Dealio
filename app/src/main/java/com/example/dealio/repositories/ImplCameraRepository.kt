@@ -6,10 +6,8 @@ import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import androidx.annotation.RequiresApi
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageProxy
 import androidx.camera.view.LifecycleCameraController
@@ -20,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class FrontCameraRepository @Inject constructor(
+class ImplCameraRepository @Inject constructor(
     private val application: Application
 ) : CameraRepository {
 

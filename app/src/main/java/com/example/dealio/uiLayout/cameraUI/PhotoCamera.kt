@@ -3,7 +3,6 @@ package com.example.dealio.uiLayout.cameraUI
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.activity.viewModels
 import androidx.camera.core.CameraSelector
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
@@ -36,14 +35,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.dealio.viewmodels.CameraResultViewModel
+import com.example.dealio.viewmodels.CameraViewModel
+import com.example.dealio.viewmodels.ScannerViewModel
 
 
 
 @Composable
 fun CameraScreen(
     activity: Activity,
-    cameraViewModel : CameraResultViewModel = viewModel(),
+    cameraViewModel : CameraViewModel = viewModel(),
 ) {
     val controller = remember {
         LifecycleCameraController(

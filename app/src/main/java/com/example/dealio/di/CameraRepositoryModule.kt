@@ -1,7 +1,7 @@
 package com.example.dealio.di
 
 import com.example.dealio.repositories.CameraRepository
-import com.example.dealio.repositories.FrontCameraRepository
+import com.example.dealio.repositories.ImplCameraRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ abstract class CameraRepositoryModule {
     @Binds
     @Singleton
     abstract fun bindCameraRepository(
-        cameraRepositoryImpl: FrontCameraRepository
+        cameraRepositoryImpl: ImplCameraRepository
     ): CameraRepository
 
 }
