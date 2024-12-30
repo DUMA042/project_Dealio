@@ -83,10 +83,11 @@ class MainActivity : ComponentActivity() {
         )
 
 
-
         setContent {
             DealioTheme {
-val nnn=1
+
+
+
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    val qrCodeValue by cameraResultViewModel.qrCodeValue
