@@ -22,18 +22,35 @@ import android.Manifest
 import androidx.activity.result.ActivityResultLauncher
 
 import androidx.activity.viewModels
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 
 import com.example.dealio.permissions.PermissionCallback
 import com.example.dealio.permissions.PermissionManager
 
 import com.example.dealio.uiLayout.cameraUI.ScanningUI
+import com.example.dealio.uiStates.SetupUiState
+import com.example.dealio.uiStates.SetupUiState.Loading
+import com.example.dealio.uiStates.SetupUiState.Success
 import com.example.dealio.viewmodels.ScannerViewModel
+import com.example.dealio.viewmodels.SetupViewmodel
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val scannerViewModel:ScannerViewModel by viewModels()
+    private val setupViewmodel: SetupViewmodel by viewModels()
+
+
 
     @Inject
    lateinit var permissionManager: PermissionManager
@@ -50,12 +67,27 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
+        var uiState : SetupUiState by  mutableStateOf(Loading)
 
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                setupViewmodel.uiState.collect { emittedState ->
+                    uiState = emittedState
+                }
 
+            }
+        }
 
+        splashScreen.setKeepOnScreenCondition {
+            when (uiState) {
+                Loading -> true
+                is Success -> false
+            }
+        }
 
 
         val cameraCallback=object:PermissionCallback {
@@ -76,6 +108,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+
         permissionManager.registerPermissionLauncher(
             this,
             Manifest.permission.CAMERA,
@@ -86,7 +119,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             DealioTheme {
-val nnn=1
+
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    val qrCodeValue by cameraResultViewModel.qrCodeValue
@@ -103,7 +136,10 @@ val nnn=1
 
 
 //-----------------------------------------------------------------------------------
-                    ScanningUI(permissionManager,cameraCallback,modifier = Modifier.padding(innerPadding))
+
+                        ScanningUI(permissionManager,cameraCallback,modifier = Modifier.padding(innerPadding))
+
+
 //-----------------------------------------------------------------------------------
 
 //                    if(toshowRational){

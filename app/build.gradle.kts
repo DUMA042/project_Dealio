@@ -114,7 +114,16 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.viewmodel.compose)
 
+    //SplashScreen
+    implementation(libs.androidx.core.splashscreen)
 
+    //material3
+    implementation(libs.compose.material3)
+
+    //Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+    //for mutablestateOf get and set
+    implementation(libs.compose.runtime)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
