@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Dealio</string>
+    <string name= "Scanning_Holder">"Waiting To Scan"</string>
 </resources>

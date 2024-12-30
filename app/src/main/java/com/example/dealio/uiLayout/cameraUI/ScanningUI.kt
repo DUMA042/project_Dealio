@@ -19,7 +19,7 @@ import com.example.dealio.viewmodels.ScannerViewModel
 @Composable
 fun ScanningUI(permissionManager: PermissionManager, callback: PermissionCallback, scannerViewModel: ScannerViewModel=viewModel(), modifier: Modifier=Modifier){
     //If this is where the viewmodel will be built then the callback has to be build in this layer.
-    val context = LocalContext.current
+
     val permission = android.Manifest.permission.CAMERA
 
     val toShowrational by  scannerViewModel.showRationaleDialog
