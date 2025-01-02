@@ -32,7 +32,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val scannerViewModel:ScannerViewModel by viewModels()
+
 
 
     companion object {
