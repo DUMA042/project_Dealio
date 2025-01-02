@@ -24,7 +24,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.viewModels
 
 import com.example.dealio.permissions.PermissionCallback
-import com.example.dealio.permissions.PermissionManager
 
 import com.example.dealio.uiLayout.cameraUI.ScanningUI
 import com.example.dealio.viewmodels.ScannerViewModel
@@ -35,15 +34,6 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     private val scannerViewModel:ScannerViewModel by viewModels()
 
-    @Inject
-   lateinit var permissionManager: PermissionManager
-
-
-
-//    @Inject
-//     lateinit var dealiopermissionHandler: DealiopermissionHandler
-
-    private lateinit var permissionLauncher: ActivityResultLauncher<String>
 
     companion object {
         private const val TAG = "ttt"
@@ -55,32 +45,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
 
-
-
-
-        val cameraCallback=object:PermissionCallback {
-            override fun onPermissionGranted() {
-                scannerViewModel.updatePermistionState(true)
-            }
-
-            override fun onPermissionDenied() {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Camera permission denied.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            override fun onShowRational() {
-                scannerViewModel.updateShowRational(true)
-            }
-        }
-
-        permissionManager.registerPermissionLauncher(
-            this,
-            Manifest.permission.CAMERA,
-            cameraCallback
-        )
 
 
         setContent {
@@ -104,7 +68,7 @@ class MainActivity : ComponentActivity() {
 
 
 //-----------------------------------------------------------------------------------
-                    ScanningUI(permissionManager,cameraCallback,modifier = Modifier.padding(innerPadding))
+                    ScanningUI(modifier = Modifier.padding(innerPadding))
 //-----------------------------------------------------------------------------------
 
 //                    if(toshowRational){
