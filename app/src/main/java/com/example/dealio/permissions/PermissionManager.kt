@@ -12,7 +12,6 @@ class PermissionManager @Inject constructor(
     private var permissionLauncher: ActivityResultLauncher<String>? = null
 
     fun registerPermissionLauncher(
-        activity: ComponentActivity,
         permission: String,
         callback: PermissionCallback
     ) {

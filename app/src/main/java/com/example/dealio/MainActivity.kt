@@ -110,7 +110,6 @@ class MainActivity : ComponentActivity() {
 
 
         permissionManager.registerPermissionLauncher(
-            this,
             Manifest.permission.CAMERA,
             cameraCallback
         )

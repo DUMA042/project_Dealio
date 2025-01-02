@@ -19,7 +19,7 @@ import javax.inject.Inject
 class SetupViewmodel @Inject constructor() : ViewModel() {
 
     private val dataFlow = flow {
-        delay(5_000) // Simulate a 10-second delay
+        delay(10_000) // Simulate a 10-second delay
         emit("To do and delete") // Emit success with data
     }
 
