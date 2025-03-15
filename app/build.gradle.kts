@@ -5,13 +5,6 @@ plugins {
     alias(libs.plugins.secrets.gradle.plugin)
     alias(libs.plugins.dagger.hilt.android)
     alias(libs.plugins.compose.compiler)
-
-
-
-
-
-
-
 }
 
 android {
