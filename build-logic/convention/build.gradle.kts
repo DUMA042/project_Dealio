@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.android.lint)
 }
 
-group = "com.project_Dealio.build_logic.convention"
+group = "com.example.project_Dealio.build_logic.convention"
 
 // Configure the build-logic plugins to target JDK 17
 // This matches the JDK used to build the project, and is not related to what is running on device.
@@ -32,6 +32,31 @@ tasks {
     validatePlugins {
         enableStricterValidation = true
         failOnWarning = true
+    }
+}
+
+gradlePlugin {
+    plugins {
+        register("androidApplicationCompose") {
+            id = libs.plugins.dealio.android.application.compose.get().pluginId
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidApplication") {
+            id = libs.plugins.dealio.android.application.asProvider().get().pluginId
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
+
+        register("androidLibraryCompose") {
+            id = libs.plugins.dealio.android.library.compose.get().pluginId
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
+
+        register("androidLibrary") {
+            id = libs.plugins.dealio.android.library.asProvider().get().pluginId
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+
+
     }
 }
 
