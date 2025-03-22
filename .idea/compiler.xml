@@ -3,6 +3,11 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="17">
       <module name="Dealio.build_logic.convention" target="21" />
+      <module name="Dealio.core.designsystems" target="21" />
+      <module name="Dealio.feature.home" target="21" />
+      <module name="Dealio.gh.kl" target="11" />
+      <module name="Dealio.gh.kl.main" target="11" />
+      <module name="Dealio.gh.kl.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

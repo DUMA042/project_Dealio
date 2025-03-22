@@ -5,6 +5,4 @@ sealed class QrUiState {
     data class Error(val errorMessage: String) : QrUiState()
     object Loading : QrUiState()
 
-
-
 }

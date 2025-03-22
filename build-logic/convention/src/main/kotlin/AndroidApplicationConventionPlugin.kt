@@ -23,6 +23,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 testOptions.animationsDisabled = true
 //                configureGradleManagedDevices(this)
             }
+
+
 //            extensions.configure<ApplicationAndroidComponentsExtension> {
 //                configurePrintApksTask(this)
 //                configureBadgingTasks(extensions.getByType<BaseExtension>(), this)
