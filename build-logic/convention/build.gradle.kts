@@ -56,6 +56,16 @@ gradlePlugin {
             implementationClass = "AndroidLibraryConventionPlugin"
         }
 
+        register("androidFeature") {
+            id = libs.plugins.dealio.android.feature.get().pluginId
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
+
+        register("hilt") {
+            id = libs.plugins.dealio.hilt.get().pluginId
+            implementationClass = "HiltConventionPlugin"
+        }
+
 
     }
 }
