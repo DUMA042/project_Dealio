@@ -71,6 +71,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.feature.home)
+
     implementation(projects.core.designsystem)
 
     implementation(libs.accompanistPermissions)

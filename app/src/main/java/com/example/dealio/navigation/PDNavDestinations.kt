@@ -4,6 +4,10 @@
 //import androidx.compose.ui.graphics.vector.ImageVector
 //import com.example.dealio.R
 //import com.example.designsystem.icon.PDIcons
+//import com.example.designsystem.icon.PDIcons.Home
+//import com.example.feature.home.navigation.HomeRoute
+//import com.example.feature.home.R as homeR
+//
 //import kotlin.reflect.KClass
 //
 //enum class PDNavDestinations(
@@ -17,21 +21,20 @@
 //    HOME(
 //        selectedIcon = PDIcons.Upcoming,
 //        unselectedIcon = PDIcons.UpcomingBorder,
-//        iconTextId = forYouR.string.feature_foryou_title,
+//        iconTextId = homeR.string.feature_home_Home_Nav,
 //        titleTextId = R.string.app_name,
-//        route = ForYouRoute::class,
-//        baseRoute = ForYouBaseRoute::class,
+//        route = HomeRoute::class,
 //    ),
-//    FORUM(
-//        selectedIcon = NiaIcons.Bookmarks,
-//        unselectedIcon = NiaIcons.BookmarksBorder,
+//    HUB(
+//        selectedIcon = PDIcons.Bookmarks,
+//        unselectedIcon = PDIcons.BookmarksBorder,
 //        iconTextId = bookmarksR.string.feature_bookmarks_title,
 //        titleTextId = bookmarksR.string.feature_bookmarks_title,
 //        route = BookmarksRoute::class,
 //    ),
 //    SAVES(
-//        selectedIcon = NiaIcons.Grid3x3,
-//        unselectedIcon = NiaIcons.Grid3x3,
+//        selectedIcon = PDIcons.Chat,
+//        unselectedIcon = PDIcons.chatBorder,
 //        iconTextId = searchR.string.feature_search_interests,
 //        titleTextId = searchR.string.feature_search_interests,
 //        route = InterestsRoute::class,
