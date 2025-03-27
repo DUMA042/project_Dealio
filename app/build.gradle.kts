@@ -71,6 +71,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.designsystem)
+
     implementation(libs.accompanistPermissions)
 
     implementation(libs.appcompatm)
