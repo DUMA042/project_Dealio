@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.dealio.android.feature)
     alias(libs.plugins.dealio.android.library.compose)
-
 }
 
 android {
@@ -10,7 +9,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.appcompatm)
     implementation(libs.material)

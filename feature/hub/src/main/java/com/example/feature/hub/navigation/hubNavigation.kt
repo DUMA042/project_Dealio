@@ -6,15 +6,14 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.example.feature.hub.HubScreen
 import kotlinx.serialization.Serializable
-//
-//@Serializable object HubRoute
-//
-//fun NavController.navigatoHub(navOptions: NavOptions) =
+
+@Serializable data object  HubRoute
+
+//fun NavController.navigateToHub(navOptions: NavOptions) =
 //    navigate(route = HubRoute, navOptions)
 //
 //fun NavGraphBuilder.bookmarksScreen(){
 //    composable<HubRoute> {
 //        HubScreen()
 //    }
-//
 //}

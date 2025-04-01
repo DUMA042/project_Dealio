@@ -21,7 +21,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
-composeBom = "2025.03.00"
+composeBom = "2025.03.01"
 cameraCore = "1.4.1"
 secrets="2.0.1"
 lifecycle = "2.8.7"
@@ -33,7 +33,7 @@ androidTools = "31.9.1"
 androidxLintGradle = "1.0.0-alpha03"
 androidDesugarJdkLibs = "2.1.5"
 kotlinxSerializationJson = "1.8.0"
-androidxComposeFoundation = "1.8.0-rc01"
+androidxComposeFoundation = "1.8.0-rc02"
 androidxComposeMaterial3Adaptive = "1.1.0"
 androidxWindowManager = "1.3.0"
 androidxComposeRuntimeTracing = "1.7.8"
@@ -98,7 +98,15 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 
 
-#for matrial3, windows size class, adaptive navigation and icons
+
+
+
+#for matrial3, windows size class, adaptive navigation and icons--------
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose"}
+androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidxNavigation" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
 
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "androidxComposeFoundation" }
 androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
@@ -120,10 +128,6 @@ androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 
 
 # for Compose navigation(Type_save navigation)
-androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose"}
-androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidxNavigation" }
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }

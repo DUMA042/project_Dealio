@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.dealio.android.library)
     alias(libs.plugins.dealio.android.library.compose)
 
-
 }
 
 android {

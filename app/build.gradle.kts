@@ -1,25 +1,16 @@
 plugins {
-    alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.dealio.android.application)
     alias(libs.plugins.dealio.android.application.compose)
     alias(libs.plugins.secrets.gradle.plugin)
-    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.dealio.hilt)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "com.example.dealio"
-    compileSdk = 35
-
-    buildFeatures {
-        buildConfig=true
-    }
-
     defaultConfig {
         applicationId = "com.example.dealio"
-        minSdk = 29
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -32,42 +23,23 @@ android {
     }
 
     buildTypes {
-        debug { buildConfigField("String", "Namet", "\"It is working\"")
-            buildConfigField("String", "WEBURL", "\"https://barcodelookup.com/\"")
-        }
-
         release {
-            buildConfigField("String", "Namet", "\"It is working\"")
-            buildConfigField("String", "WEBURL", "\"https://api.example.com/\"")
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 
-    buildFeatures {
-        viewBinding = true
-    }
+
 }
 
 dependencies {
