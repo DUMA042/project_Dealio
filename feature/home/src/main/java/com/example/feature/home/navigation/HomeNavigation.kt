@@ -30,7 +30,7 @@ import kotlin.reflect.KClass
 
 @Serializable  data object HomeRoute
 
-fun NavController.HomeRotue(navOptions: NavOptions) = navigate(HomeRoute, navOptions)
+//fun NavController.HomeRotue(navOptions: NavOptions) = navigate(HomeRoute, navOptions)
 
 //fun NavController.navigateToHub(navOptions: NavOptions) =
 //    navigate(route = HomeRoute, navOptions)
