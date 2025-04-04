@@ -9,11 +9,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable data object  HubRoute
 
-//fun NavController.navigateToHub(navOptions: NavOptions) =
-//    navigate(route = HubRoute, navOptions)
-//
-//fun NavGraphBuilder.bookmarksScreen(){
-//    composable<HubRoute> {
-//        HubScreen()
-//    }
-//}
+fun NavController.navigateToHub(navOptions: NavOptions) =
+    navigate(route = HubRoute, navOptions)
+
+fun NavGraphBuilder.hubBuilder(){
+    composable<HubRoute> {
+        HubScreen()
+    }
+}

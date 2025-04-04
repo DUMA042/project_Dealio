@@ -103,7 +103,7 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 
 #for matrial3, windows size class, adaptive navigation and icons--------
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose"}
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidxNavigation" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 

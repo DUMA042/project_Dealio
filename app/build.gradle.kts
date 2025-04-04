@@ -44,6 +44,8 @@ android {
 
 dependencies {
     implementation(projects.feature.home)
+    implementation(projects.feature.hub)
+    implementation(projects.feature.saves)
 
     implementation(projects.core.designsystem)
 

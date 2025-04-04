@@ -57,11 +57,11 @@ fun RowScope.PDNavigationBarItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = PDNavigationDefaults.navigationContentColor(),
+            selectedTextColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = PDNavigationDefaults.navigationContentColor(),
+            indicatorColor = PDNavigationDefaults.navigationIndicatorColor(),
         ),
     )
 }
@@ -80,7 +80,7 @@ fun PDNavigationBar(
 ) {
     NavigationBar(
         modifier = modifier,
-        contentColor = NiaNavigationDefaults.navigationContentColor(),
+        contentColor = PDNavigationDefaults.navigationContentColor(),
         tonalElevation = 0.dp,
         content = content,
     )
@@ -121,11 +121,11 @@ fun PDNavigationRailItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors = NavigationRailItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = PDNavigationDefaults.navigationContentColor(),
+            selectedTextColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = PDNavigationDefaults.navigationContentColor(),
+            indicatorColor = PDNavigationDefaults.navigationIndicatorColor(),
         ),
     )
 }
@@ -147,7 +147,7 @@ fun NiaNavigationRail(
     NavigationRail(
         modifier = modifier,
         containerColor = Color.Transparent,
-        contentColor = NiaNavigationDefaults.navigationContentColor(),
+        contentColor = PDNavigationDefaults.navigationContentColor(),
         header = header,
         content = content,
     )
@@ -173,24 +173,24 @@ fun PDNavigationSuiteScaffold(
         .calculateFromAdaptiveInfo(windowAdaptiveInfo)
     val navigationSuiteItemColors = NavigationSuiteItemColors(
         navigationBarItemColors = NavigationBarItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = PDNavigationDefaults.navigationContentColor(),
+            selectedTextColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = PDNavigationDefaults.navigationContentColor(),
+            indicatorColor = PDNavigationDefaults.navigationIndicatorColor(),
         ),
         navigationRailItemColors = NavigationRailItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = PDNavigationDefaults.navigationContentColor(),
+            selectedTextColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = PDNavigationDefaults.navigationContentColor(),
+            indicatorColor = PDNavigationDefaults.navigationIndicatorColor(),
         ),
         navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
+            selectedIconColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = PDNavigationDefaults.navigationContentColor(),
+            selectedTextColor = PDNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = PDNavigationDefaults.navigationContentColor(),
         ),
     )
 
@@ -204,7 +204,7 @@ fun PDNavigationSuiteScaffold(
         layoutType = layoutType,
         containerColor = Color.Transparent,
         navigationSuiteColors = NavigationSuiteDefaults.colors(
-            navigationBarContentColor = NiaNavigationDefaults.navigationContentColor(),
+            navigationBarContentColor = PDNavigationDefaults.navigationContentColor(),
             navigationRailContainerColor = Color.Transparent,
         ),
         modifier = modifier,
@@ -250,7 +250,7 @@ class PDNavigationSuiteScope internal constructor(
 /**
  * Now in Android navigation default values.
  */
-object NiaNavigationDefaults {
+object PDNavigationDefaults {
     @Composable
     fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
 
