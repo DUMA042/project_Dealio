@@ -66,6 +66,11 @@ gradlePlugin {
             implementationClass = "HiltConventionPlugin"
         }
 
+        register("jvmLibrary") {
+            id = libs.plugins.dealio.jvm.library.get().pluginId
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
+
 
     }
 }

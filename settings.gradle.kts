@@ -35,3 +35,7 @@ include(":core:database")
 include(":feature:home")
 include(":feature:hub")
 include(":feature:saves")
+include(":core:data")
+include(":core:common")
+
+include(":core:model")

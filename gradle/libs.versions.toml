@@ -8,6 +8,7 @@ okhttpBom = "4.12.0"
 hilt="2.51.1"
 hiltAndroid = "2.54"
 hiltAndroidCompiler = "2.51.1"
+hiltExt = "1.2.0"
 ksp="2.1.10-1.0.31"
 accompanistPermissions = "0.37.0"
 appcompat = "1.7.0"
@@ -21,7 +22,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
-composeBom = "2025.03.01"
+composeBom = "2025.04.00"
 cameraCore = "1.4.1"
 secrets="2.0.1"
 lifecycle = "2.8.7"
@@ -33,7 +34,7 @@ androidTools = "31.9.1"
 androidxLintGradle = "1.0.0-alpha03"
 androidDesugarJdkLibs = "2.1.5"
 kotlinxSerializationJson = "1.8.0"
-androidxComposeFoundation = "1.8.0-rc02"
+androidxComposeFoundation = "1.8.0-rc03"
 androidxComposeMaterial3Adaptive = "1.1.0"
 androidxWindowManager = "1.3.0"
 androidxComposeRuntimeTracing = "1.7.8"
@@ -42,7 +43,19 @@ androidxNavigation = "2.8.9"
 androidxLifecycle = "2.8.7"
 androidxMetrics = "1.0.0-beta02"
 androidxProfileinstaller = "1.4.1"
-androidxTracing = "1.3.0-beta01"
+androidxTracing = "1.3.0-rc01"
+kotlinxCoroutines = "1.10.1"
+kotlinxDatetime = "0.6.1"
+turbine = "1.2.0"
+ndroidxProfileinstaller = "1.4.1"
+androidxTestCore = "1.6.1"
+androidxTestExt = "1.2.1"
+androidxTestRules = "1.6.1"
+androidxTestRunner = "1.6.2"
+androidxUiAutomator = "2.3.0"
+androidxWork = "2.10.0"
+androidxEspresso = "3.6.1"
+
 
 
 
@@ -96,6 +109,12 @@ lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.re
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso" }
+androidx-test-ext = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidxTestExt" }
+androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
+androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "androidxUiAutomator" }
+
 
 
 
@@ -125,7 +144,23 @@ androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-juni
 androidx-compose-ui-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
+hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
+hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
 
+
+javax-inject = { module = "javax.inject:javax.inject", version = "1" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
+
+
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 
 # for Compose navigation(Type_save navigation)
 
@@ -169,6 +204,7 @@ dealio-android-library = { id = "dealio.android.library" }
 dealio-android-library-compose = { id = "dealio.android.library.compose" }
 dealio-android-feature = { id = "dealio.android.feature" }
 dealio-hilt = { id = "dealio.hilt" }
+dealio-jvm-library = { id = "dealio.jvm.library" }
 
 
 
