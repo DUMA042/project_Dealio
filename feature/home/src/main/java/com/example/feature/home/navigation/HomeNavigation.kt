@@ -16,8 +16,6 @@ import com.example.feature.home.HomeScreen
 
 fun NavController.navigateToHome(navOptions: NavOptions) = navigate(HomeRoute, navOptions)
 
-fun NavController.navigateToHub(navOptions: NavOptions) =
-    navigate(route = HomeRoute, navOptions)
 
 fun NavGraphBuilder.homeBuilder(){
     composable<HomeRoute> {

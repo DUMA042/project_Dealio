@@ -2,10 +2,25 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="17">
+      <module name="Dealio.app" target="21" />
       <module name="Dealio.build_logic.convention" target="21" />
+      <module name="Dealio.core.common" target="11" />
+      <module name="Dealio.core.common.main" target="11" />
+      <module name="Dealio.core.common.test" target="11" />
+      <module name="Dealio.core.data" target="21" />
       <module name="Dealio.core.data.test" target="11" />
+      <module name="Dealio.core.database" target="21" />
+      <module name="Dealio.core.designsystem" target="21" />
       <module name="Dealio.core.designsystem.test" target="11" />
       <module name="Dealio.core.designsystems" target="21" />
+      <module name="Dealio.core.model" target="11" />
+      <module name="Dealio.core.model.main" target="11" />
+      <module name="Dealio.core.model.test" target="11" />
+      <module name="Dealio.feature.home" target="21" />
+      <module name="Dealio.feature.hub" target="21" />
+      <module name="Dealio.feature.saves" target="21" />
+      <module name="Dealio.feature.scanCode" target="21" />
+      <module name="Dealio.feature.scanCode.test" target="11" />
       <module name="Dealio.gh.kl" target="11" />
       <module name="Dealio.gh.kl.main" target="11" />
       <module name="Dealio.gh.kl.test" target="11" />

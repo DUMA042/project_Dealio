@@ -39,3 +39,4 @@ include(":core:data")
 include(":core:common")
 
 include(":core:model")
+include(":feature:scanCode")
